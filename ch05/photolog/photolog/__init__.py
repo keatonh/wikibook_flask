@@ -16,12 +16,12 @@ from flask import Flask, render_template, request, url_for
 
 
 def print_settings(config):
-    print '========================================================'
-    print 'SETTINGS for PHOTOLOG APPLICATION'
-    print '========================================================'
+    print ('========================================================')
+    print ('SETTINGS for PHOTOLOG APPLICATION')
+    print ('========================================================')
     for key, value in config:
-        print '%s=%s' % (key, value)
-    print '========================================================'
+        print ('%s=%s' % (key, value))
+    print ('========================================================')
 
 ''' HTTP Error Code 404와 500은 errorhanlder에 application 레벨에서
     적용되므로 app 객체 생성시 등록해준다.
@@ -48,7 +48,7 @@ def create_app(config_filepath='resource/config.cfg'):
     from photolog.photolog_config import PhotologConfig
     photolog_app.config.from_object(PhotologConfig)
     photolog_app.config.from_pyfile(config_filepath, silent=True)
-    print_settings(photolog_app.config.iteritems())
+    print_settings(photolog_app.config.items())
         
     # 로그 초기화
     from photolog.photolog_logger import Log
@@ -66,7 +66,11 @@ def create_app(config_filepath='resource/config.cfg'):
        
     # 뷰 함수 모듈은 어플리케이션 객체 생성하고 블루프린트 등록전에 
     # 뷰 함수가 있는 모듈을 임포트해야 해당 뷰 함수들을 인식할 수 있음
-    from photolog.controller import *
+    from photolog.controller import login
+    from photolog.controller import photo_show
+    from photolog.controller import photo_upload
+    from photolog.controller import register_user
+    from photolog.controller import twitter
     
     from photolog.photolog_blueprint import photolog
     photolog_app.register_blueprint(photolog)
