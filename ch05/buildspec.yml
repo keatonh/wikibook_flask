@@ -1,0 +1,19 @@
+version: 0.1
+            
+phases:
+  install:
+    commands:
+      - apt-get -y update
+      - apt-get -y install zip
+  pre_build:
+    commands:
+      - git checkout -b python3
+  build:
+    commands:
+      - cd ch05/photolog/
+  post_build:
+    commands:
+      - zip -r photolog.zip .
+artifacts:
+  files:
+    - ch05/photolog/photolog.zip
